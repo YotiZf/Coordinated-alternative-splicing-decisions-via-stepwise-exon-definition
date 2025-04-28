@@ -1,9 +1,3 @@
-% Add all subfolders from 'data2d-master' to MATLAB path
-addpath(genpath('data2d-master'))
-
-% Save the updated path to a file
-savepath pathsa.m
-
 % Initialize the Data2Dynamics (D2D) framework
 arInit;
 
