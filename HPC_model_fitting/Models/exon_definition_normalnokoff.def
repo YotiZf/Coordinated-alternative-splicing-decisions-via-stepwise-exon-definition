@@ -1,0 +1,84 @@
+DESCRIPTION
+"test"
+
+PREDICTOR
+t               T   s         time	0	100000
+
+COMPARTMENTS
+
+
+STATES
+incl        C   pM      conc.   cyt     1  
+skip        C   pM      conc.   cyt     1  
+fullIR        C   pM      conc.   cyt     1    
+firstIR        C   pM      conc.   cyt     1    
+secondIR        C   pM      conc.   cyt     1    
+
+
+    
+
+INPUTS
+
+
+ODES
+
+"kspli*(firstIR+secondIR)-kincl*incl"
+"kspli*P101-kskip*skip"
+"P000+P100+P0a0+P010+P001+P1a0+P0a1+P1a1-(kdr1+kdr2)*fullIR"
+"kspli*P011+kspli*P111-kdr1*firstIR"
+"kspli*P110+kspli*P111-kdr2*secondIR"
+
+DERIVED
+
+P100 C   "pM"   "conc." "k1*P000"
+P0a0 C   "pM"   "conc." "k2a*P000"
+P010 C   "pM"   "conc." "k2a*k2b*P000"
+P001 C   "pM"   "conc." "k3*P000"
+P1a0 C   "pM"   "conc." "k1*k2a*P000"
+P110 C   "pM"   "conc." "k1*k2a*k2b*P000-kspli*k1*k2a*k2b*P000"
+P101 C   "pM"   "conc." "k1*k3*P000-kspli*k1*k3*P000"
+P0a1 C   "pM"   "conc." "k2a*k3*P000"
+P011 C   "pM"   "conc." "k2a*k2b*k3*P000-kspli*k2a*k2b*k3*P000"
+P1a1 C   "pM"   "conc." "k1*k2a*k3*P000"
+P111 C   "pM"   "conc." "k1*k2a*k2b*k3*P000-2*kspli*k1*k2a*k2b*k3*P000"
+
+
+sum   C   "pM"   "conc."  "incl+skip+fullIR + firstIR + secondIR"
+
+norm_inclusion    C   "pM"   "conc."            "incl/sum"
+norm_skipping    C   "pM"   "conc."             "skip/sum"
+norm_full_IR    C   "pM"   "conc."             "fullIR/sum"
+norm_first_IR   C   "pM"   "conc."              "firstIR/sum"
+norm_second_IR   C   "pM"   "conc."              "secondIR/sum"
+
+
+
+
+
+OBSERVABLES
+
+inclusion           C   "au"  "conc."   0   0   "norm_inclusion"
+skipping           C   "au"  "conc."   0   0   "norm_skipping"
+full_IR           C   "au"  "conc."   0   0   "norm_full_IR"
+first_IR           C   "au"  "conc."   0   0   "norm_first_IR"
+second_IR           C   "au"  "conc."   0   0   "norm_second_IR"
+
+ERRORS
+inclusion "sd"
+skipping "sd" 
+full_IR "sd"  
+first_IR "sd" 
+second_IR "sd"
+
+CONDITIONS
+P000              "s"
+init_incl         "0"
+init_skip         "0"
+init_fullIR         "0"
+init_firstIR         "0"
+init_secondIR         "0"
+
+
+
+ 
+

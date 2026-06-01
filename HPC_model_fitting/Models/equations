@@ -1,0 +1,13 @@
+Equations
+P000
+P100=k1*P000
+P0a0=b1*P000
+P010=b1*b2*P000
+P001=k3*P000
+P1a0=k1*b1*P000
+P110=k1*b1*b2*P000   splic
+P101=k1*k3*P000 skip
+P0a1=b1*k3*P000
+P011=b1*c1*P000 splic
+P1a1=k1*b1*k3*P000
+P111=k1*b1*b2*k3*P000   incl

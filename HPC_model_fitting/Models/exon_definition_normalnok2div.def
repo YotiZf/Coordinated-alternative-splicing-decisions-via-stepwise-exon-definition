@@ -1,0 +1,97 @@
+DESCRIPTION
+"test"
+
+PREDICTOR
+t               T   s         time	0	100000
+
+COMPARTMENTS
+
+
+STATES
+P000        C   pM      conc.   cyt     1  
+P100        C   pM      conc.   cyt     1  
+P010        C   pM      conc.   cyt     1    
+P001        C   pM      conc.   cyt     1    
+P110        C   pM      conc.   cyt     1    
+P101        C   pM      conc.   cyt     1    
+P011        C   pM      conc.   cyt     1    
+P111        C   pM      conc.   cyt     1    
+incl        C   pM      conc.   cyt     1    
+skip        C   pM      conc.   cyt     1    
+ret         C   pM      conc.   cyt     1    
+ret1        C   pM      conc.   cyt     1    
+ret1z       C   pM      conc.   cyt     1    
+ret2        C   pM      conc.   cyt     1    
+ret2z       C   pM      conc.   cyt     1    
+deg         C   pM      conc.   cyt     1    
+
+
+INPUTS
+
+
+ODES
+
+"-(P000)*(k1+k2+k3+kret) +((P100*k4)+(P010*k5)+(P001*k6))+s"
+"(P000*k1)-(P100*k2)-(P100*k3)-(P100*(kret))+(P110*k5)+(P101*k6)-(P100*k4)"
+"(P000*k2)-(P010*k1)-(P010*k3)-(P010*(kret))+(P110*k4)+(P011*k6)-(P010*k5)"
+"(P000*k3)-(P001*k1)-(P001*k2)-(P001*(kret))+(P101*k4)+(P011*k5)-(P001*k6)"
+"(P010*k1)+(P100*k2)-(P110*k3)-(P110*(kret))+(P111*k6)-(P110*(k4+k5))-(P110*(kspli1))"
+"(P001*k1)+(P100*k3)-(P101*k2)-(P101*(kret))+(P111*k5)-(P101*(k4+k6))-(P101*(kspli12)/k2)"
+"(P001*k2)+(P010*k3)-(P011*k1)-(P011*(kret))+(P111*k4)-(P011*(k6+k5))-(P011*(kspli2))"
+"(P011*k1)+(P101*k2)+(P110*k3)-(P111*(kret))-(P111*(k4+k5+k6))-(P111*(kspli1+kspli2))-P111*kspli12"
+"(ret1z*kspli1)+(ret2z*kspli2)-(incl*kincl)"
+"(P101*(kspli12)/k2)+P111*kspli12-(skip*kskip)"
+"kret*(P000+P100+P010+P001+P110+P101+ P011 +P111)-(ret*(kdr1+kdr2))"
+"((kspli2)*P011)-(ret1*k1)+(ret1z*k4)-(ret1*kdr1)"
+"(ret1*k1)-(ret1z*kspli1)-(ret1z*k4)-(ret1z*kdr1)+(kspli2*(P111))"
+"((kspli1)*P110)-(ret2*k3)+(ret2z*k6)-(ret2*kdr2)"
+"(ret2*k3)-(ret2z*kspli2)-(ret2z*k6)-(ret2z*kdr2)+(kspli1*(P111))"
+"(kincl*incl)+(kskip*skip)+kdr1*(ret1+ret1z)+kdr2*(ret2+ret2z)+((kdr1+kdr2)*(ret))"
+
+DERIVED
+
+inclusion_raw    C   "pM"   "conc."            "incl"
+skipping_raw    C   "pM"   "conc."             "skip"
+full_IR_raw     C   "pM"   "conc."            "ret+P000+P100+P010+P001+P110+P101+P011+P111"
+first_IR_raw    C   "pM"   "conc."             "ret1+ret1z"
+second_IR_raw    C   "pM"   "conc."             "ret2+ret2z"
+
+sum   C   "pM"   "conc."  "inclusion_raw+skipping_raw+full_IR_raw + first_IR_raw + second_IR_raw"
+
+norm_inclusion    C   "pM"   "conc."            "inclusion_raw/sum"
+norm_skipping    C   "pM"   "conc."             "skipping_raw/sum"
+norm_full_IR    C   "pM"   "conc."             "full_IR_raw/sum"
+norm_first_IR   C   "pM"   "conc."              "first_IR_raw/sum"
+norm_second_IR   C   "pM"   "conc."              "second_IR_raw/sum"
+
+
+
+
+
+OBSERVABLES
+
+
+ERRORS
+
+
+CONDITIONS
+init_P000         "0"
+init_P100         "0"
+init_P010         "0"
+init_P001         "0"
+init_P110         "0"
+init_P101         "0"
+init_P011         "0"
+init_P111         "0"
+init_incl         "0"
+init_skip         "0"
+init_ret          "0"
+init_ret1         "0"
+init_ret1z        "0"
+init_ret2         "0"
+init_ret2z        "0"
+init_deg          "0"
+
+
+ 
+

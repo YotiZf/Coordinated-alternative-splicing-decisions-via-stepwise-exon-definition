@@ -1,0 +1,24 @@
+DESCRIPTION
+"test"
+
+PREDICTOR
+t               T   s         time	0	100000000
+
+
+
+
+INPUTS
+
+OBSERVABLES
+
+ERRORS
+
+CONDITIONS
+sd_inclusion  "0.041569"
+sd_skipping  "0.019003"
+sd_fullir  "0.028817"
+sd_firstir  "0.021385"
+sd_secir  "0.01764"
+k2 "k2*f_mut118"
+k2a "k2a*f_mut118"
+k2b "k2b*f_mut118"
