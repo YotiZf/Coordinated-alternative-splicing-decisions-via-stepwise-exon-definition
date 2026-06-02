@@ -1,6 +1,6 @@
-# Model fitting code — Data2Dynamics (MATLAB)
+# Model fitting code
 
-This repository provides the code used to perform multi-start parameter estimation for ODE-based models using the Data2Dynamics (d2d) framework in MATLAB. The fitting was performed on an HPC cluster using SLURM, and the saved results are included as `.mat` files.
+This repository provides the code used to perform multi-start parameter estimation for ODE-based models using the Data2Dynamics (d2d) framework in MATLAB. The fitting was performed on an HPC cluster(bwHPC) using SLURM, and the saved results are included as `.mat` files.
 
 ## Repository structure
 
@@ -26,7 +26,7 @@ The function takes two arguments:
 Setup(moo, fit)
 ```
 
-- `moo` — integer selecting the model to load (`1` or `2`)
+- `moo` — integer selecting the model to load depending on the model's step(`1` or `2`)
 - `fit` — number of multi-start fitting runs
 
 Example:
@@ -51,8 +51,4 @@ sbatch submit_jobarray_d2d.sh
 - [Data2Dynamics (d2d)](https://github.com/Data2Dynamics/d2d)
 - SLURM (for HPC job submission)
 
-## Citation
 
-If you use this code, please cite:
-
-> Kristofori, P. *Computational Modeling of Gene Expression and Splicing*. PhD thesis, University of Stuttgart.
